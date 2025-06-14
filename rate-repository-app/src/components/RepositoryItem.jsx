@@ -1,5 +1,5 @@
-import { View, Text, TouchableHighlight } from 'react-native';
-
+import { View, TouchableHighlight } from 'react-native';
+import Text from './Text';
 
 const RepositoryItem = (props) => {
   const {item, index, separators} = props;
@@ -11,13 +11,13 @@ const RepositoryItem = (props) => {
       onShowUnderlay={separators.highlight}
       onHideUnderlay={separators.unhighlight}>
       <View style={{backgroundColor: 'white'}}>
-        <Text>Full name: {item.fullName}</Text>
-        <Text>Description: {item.description}</Text>
-        <Text>Language: {item.language}</Text>
-        <Text>Stars: {item.stargazersCount}</Text>
-        <Text>Forks: {item.forksCount}</Text>
-        <Text>Reviews: {item.reviewCount}</Text>
-        <Text>Rating: {item.ratingAverage}</Text>
+        <Text fontWeight="bold" fontSize="subheading" color="primary">Full name: {item.fullName}</Text>
+        <Text color="textSecoundary">Description: {item.description}</Text>
+        <Text color="textSecoundary">Language: {item.language}</Text>
+        <Text color="textSecoundary">Stars: {item.stargazersCount}</Text>
+        <Text color="textSecoundary">Forks: {item.forksCount}</Text>
+        <Text color="textSecoundary">Reviews: {item.reviewCount}</Text>
+        <Text color="textSecoundary">Rating: {item.ratingAverage}</Text>
       </View>
     </TouchableHighlight>
   );
