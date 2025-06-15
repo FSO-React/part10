@@ -72,9 +72,9 @@ const RepositoryItem = (props) => {
               source={{uri: item.ownerAvatarUrl}}
             />
           </View>
-          <View style={{ flexGrow: 1, padding: 8 }}>
+          <View style={{ flexGrow: 1, padding: 8 }}> 
             <Text fontWeight="bold" fontSize="subheading" color="primary">{item.fullName}</Text>
-            <Text color="textSecoundary">{item.description}</Text>
+            <Text color="textSecoundary" style={{ flex: 1, flexShrink: 1, flexWrap: "wrap" }}>{item.description}</Text>
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
               <Text fontWeight="bold" style={styles.languageLogo}>{item.language}</Text>
             </View>
