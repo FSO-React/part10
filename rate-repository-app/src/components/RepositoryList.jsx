@@ -2,8 +2,11 @@ import { FlatList, View, StyleSheet, TouchableHighlight, Text } from 'react-nati
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#e1e4e8",
+  },
   separator: {
-    height: 10,
+    height: 0,
   },
 });
 
@@ -61,6 +64,7 @@ const RepositoryList = () => {
     <FlatList
       data={repositories}
       ItemSeparatorComponent={ItemSeparator}
+      style={styles.container}
       renderItem={({item, index, separators}) => (
         <RepositoryItem item={item} index={index} separators={separators} />
       )}
