@@ -7,11 +7,12 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginBottom: 10, 
     marginHorizontal: 12, 
-    padding: 5,
+    padding: 5, 
   },
   containerDetails: {
     display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap"
   },
   containerStats: {
     display: "flex",
@@ -66,15 +67,15 @@ const RepositoryItem = (props) => {
       onHideUnderlay={separators.unhighlight}>
       <View style={styles.containerItem}>
         <View style={styles.containerDetails}>
-          <View style={{ flexGrow: 0, padding: 8 }}>
+          <View style={{ flexGrow: 0, padding: 8, width: '20%' }}>
             <Image
               style={styles.tinyLogo}
               source={{uri: item.ownerAvatarUrl}}
             />
           </View>
-          <View style={{ flexGrow: 1, padding: 8 }}> 
+          <View style={{ flexGrow: 1, padding: 8, width: '80%' }}> 
             <Text fontWeight="bold" fontSize="subheading" color="primary">{item.fullName}</Text>
-            <Text color="textSecoundary" style={{ flex: 1, flexShrink: 1, flexWrap: "wrap" }}>{item.description}</Text>
+            <Text color="textSecoundary" >{item.description}</Text>
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
               <Text fontWeight="bold" style={styles.languageLogo}>{item.language}</Text>
             </View>
