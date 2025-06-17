@@ -39,3 +39,24 @@ export const AUTHENTICATE_FRAGMENT = gql`
     }
   }
 `;
+
+
+// export const AUTHENTICATE_FRAGMENT = gql`
+//   fragment SignInFragment on AuthenticatePayload {
+//     accessToken
+//     expiresAt
+//     user {
+//       ...UserFragment
+//     }
+//   }
+//   ${USER_FRAGMENT}
+// `;
+
+export const USER_FRAGMENT = gql`
+  fragment UserFragment on User {
+    id
+    createdAt
+    reviewCount
+    username
+  }
+`;

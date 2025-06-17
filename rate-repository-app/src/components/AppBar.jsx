@@ -5,6 +5,9 @@ import Constants from 'expo-constants';
 import Text from './Text';
 import theme from '../theme';
 
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../graphql/queries';
+
 const styles = StyleSheet.create({
   container: {
     display: "flex",
@@ -39,11 +42,20 @@ const AppBarTab = ({ text, url, show }) => {
 );};
 
 const AppBar = () => {
+  const { data, loading } = useQuery(GET_ME);
+  
+  if (loading) {
+    return null;
+  }
+  
+  const loggedIn = data && data.me;
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal >
         <AppBarTab text="Repositories" url="/" show="true"/>
-        <AppBarTab text="Sign In" url="/signin" show="true"/>
+        <AppBarTab text="Sign In" url="/signin" show={!loggedIn}/>
+        <AppBarTab text="Sign Out" url="/signout" show={loggedIn}/>
       </ScrollView>
     </View>
   );
