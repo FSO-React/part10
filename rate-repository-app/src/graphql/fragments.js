@@ -26,3 +26,16 @@ export const REPOSITORY_CONNECTION_FRAGMENT = gql`
     }
   }
 `;
+
+export const AUTHENTICATE_FRAGMENT = gql`
+  fragment SignInFragment on AuthenticatePayload {
+    accessToken
+    expiresAt
+    user {
+      id
+      createdAt
+      reviewCount
+      username
+    }
+  }
+`;
