@@ -62,7 +62,7 @@ const RepositoryItem = (props) => {
   return (
     <TouchableHighlight
       key={item.id}
-      onPress={() => null}
+      onPress={() => console.log(`Pressed on ${item.fullName}`)}
       onShowUnderlay={separators.highlight}
       onHideUnderlay={separators.unhighlight}>
       <View style={styles.containerItem}>
