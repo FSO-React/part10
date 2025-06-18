@@ -1,5 +1,8 @@
 import { gql } from '@apollo/client';
-import { AUTHENTICATE_FRAGMENT } from './fragments';
+import { 
+  AUTHENTICATE_FRAGMENT,
+  REVIEW_FRAGMENT
+} from './fragments';
 
 export const SIGN_IN = gql`
   mutation Authenticate($credentials: AuthenticateInput) {
@@ -8,4 +11,13 @@ export const SIGN_IN = gql`
     }
   }
   ${AUTHENTICATE_FRAGMENT}
+`;
+
+export const CREATE_REVIEW = gql`
+  mutation CreateReview($review: CreateReviewInput) {
+    createReview(review: $review) {
+      ...ReviewFragment
+    }
+  }
+  ${REVIEW_FRAGMENT}
 `;

@@ -33,16 +33,17 @@
     "dotenv": "^16.5.0",
     "expo": "~50.0.17",
     "expo-dev-client": "~3.3.12",
+    "expo-linking": "~6.2.2",
     "expo-status-bar": "~1.11.1",
     "formik": "^2.4.6",
     "graphql": "^16.11.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
+    "react-native-paper": "^5.14.5",
     "react-native-web": "~0.19.6",
     "react-router-native": "^6.30.0",
-    "yup": "^1.6.1",
-    "expo-linking": "~6.2.2"
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
