@@ -1,4 +1,5 @@
 import { View, TouchableHighlight, StyleSheet, Image } from 'react-native';
+import { useNavigate } from 'react-router-native';
 import Text from './Text';
 import theme from '../theme';
 
@@ -57,12 +58,13 @@ const StatItem = ({ text, testID, number }) => (
 );
 
 const RepositoryItem = (props) => {
+  const navigate = useNavigate();
   const {item, index, separators} = props;
   
   return (
     <TouchableHighlight
       key={item.id}
-      onPress={() => console.log(`Pressed on ${item.fullName}`)}
+      onPress={() => navigate(`/repositories/${item.id}`)}
       onShowUnderlay={separators.highlight}
       onHideUnderlay={separators.unhighlight}>
       <View testID="repositoryItem" style={styles.containerItem}>

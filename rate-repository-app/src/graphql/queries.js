@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 import { 
   REPOSITORY_CONNECTION_FRAGMENT,
-  USER_FRAGMENT 
+  USER_FRAGMENT,
+  ONE_REPOSITORY_FRAGMENT 
 } from './fragments';
 
 export const GET_REPOSITORIES = gql`
@@ -22,3 +23,11 @@ export const GET_ME = gql`
   ${USER_FRAGMENT}
 `;
 
+export const GET_REPOSITORY = gql`
+  query Repository($id: ID!) {
+    repository(id: $id) {
+      ...OneRepositoryFragment
+    }
+  }
+  ${ONE_REPOSITORY_FRAGMENT}
+`;
