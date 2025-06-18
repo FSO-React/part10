@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const formatStatNumber = (num) => {
+export const formatStatNumber = (num) => {
     if (num >= 1000) {
         return (`${Math.round(num / 1000 * 10) / 10}k`);
     }else{
@@ -49,9 +49,9 @@ const formatStatNumber = (num) => {
     }
 };
 
-const StatItem = ({ text, number }) => (
+const StatItem = ({ text, testID, number }) => (
     <View style={styles.statItem}>
-        <Text fontWeight="bold">{formatStatNumber(number)}</Text> 
+        <Text testID={testID} fontWeight="bold">{formatStatNumber(number)}</Text> 
         <Text>{text}</Text>
     </View>
 );
@@ -65,7 +65,7 @@ const RepositoryItem = (props) => {
       onPress={() => console.log(`Pressed on ${item.fullName}`)}
       onShowUnderlay={separators.highlight}
       onHideUnderlay={separators.unhighlight}>
-      <View style={styles.containerItem}>
+      <View testID="repositoryItem" style={styles.containerItem}>
         <View style={styles.containerDetails}>
           <View style={{ flexGrow: 0, padding: 8, width: '20%' }}>
             <Image
@@ -74,19 +74,19 @@ const RepositoryItem = (props) => {
             />
           </View>
           <View style={{ flexGrow: 1, padding: 8, width: '80%' }}> 
-            <Text fontWeight="bold" fontSize="subheading" color="primary">{item.fullName}</Text>
-            <Text color="textSecoundary" >{item.description}</Text>
+            <Text testID="fullName" fontWeight="bold" fontSize="subheading" color="primary">{item.fullName}</Text>
+            <Text testID="description" color="textSecoundary" >{item.description}</Text>
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-              <Text fontWeight="bold" style={styles.languageLogo}>{item.language}</Text>
+              <Text testID="language" fontWeight="bold" style={styles.languageLogo}>{item.language}</Text>
             </View>
           </View>
         </View>
 
         <View style={styles.containerStats}>
-          <StatItem text="Stars" number={item.stargazersCount}/>
-          <StatItem text="Forks" number={item.forksCount}/>
-          <StatItem text="Reviews" number={item.reviewCount}/>
-          <StatItem text="Rating" number={item.ratingAverage}/>
+          <StatItem testID="stargazersCount" text="Stars" number={item.stargazersCount}/>
+          <StatItem testID="forksCount" text="Forks" number={item.forksCount}/>
+          <StatItem testID="reviewCount" text="Reviews" number={item.reviewCount}/>
+          <StatItem testID="ratingAverage" text="Rating" number={item.ratingAverage}/>
         </View>
       </View>
     </TouchableHighlight>

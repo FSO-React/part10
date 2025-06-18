@@ -58,6 +58,59 @@ const validationSchema = yup.object().shape({
     .min(8, 'Password is too short - should be 8 chars minimum.'),
 })
 
+export const SignInForm = ({ onSubmit }) => {
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+      testID='usernameInput'
+        placeholder="Username"
+        value={formik.values.username}
+        onChangeText={formik.handleChange('username')}
+        onBlur={formik.handleBlur('username')}
+        style={[
+          styles.input,
+          styles.child,
+          formik.touched.username && formik.errors.username && styles.errorInput
+        ]}    
+      />
+      {formik.touched.username && formik.errors.username && (
+        <Text style={{ color: '#d73a4a', marginHorizontal: 10 }}>{formik.errors.username}</Text>
+      )}
+
+      <TextInput
+        testID='passwordInput'
+        placeholder="Password"
+        value={formik.values.password}
+        onChangeText={formik.handleChange('password')}
+        onBlur={formik.handleBlur('password')}
+        style={[
+          styles.input,
+          styles.child,
+          formik.touched.password && formik.errors.password && styles.errorInput
+        ]}      
+        secureTextEntry
+      />
+      {formik.touched.password && formik.errors.password && (
+        <Text style={{ color: '#d73a4a', marginHorizontal: 10 }}>{formik.errors.password}</Text>
+      )}
+
+      <Pressable
+        testID='submitButton' 
+        onPress={formik.handleSubmit}
+        style={{ ...styles.button, ...styles.child}}
+      >
+        <Text style={styles.buttonText}>Sign in</Text>
+      </Pressable>
+    </View>
+  );
+}
+
 
 const SignIn = () => {
   const [signIn] = useSignIn();
@@ -74,53 +127,9 @@ const SignIn = () => {
       console.log(e);
     }
   };
-  
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit,
-  });
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Username"
-        value={formik.values.username}
-        onChangeText={formik.handleChange('username')}
-        onBlur={formik.handleBlur('username')}
-        style={[
-          styles.input,
-          styles.child,
-          formik.touched.username && formik.errors.username && styles.errorInput
-        ]}    
-      />
-      {formik.touched.username && formik.errors.username && (
-        <Text style={{ color: '#d73a4a', marginHorizontal: 10 }}>{formik.errors.username}</Text>
-      )}
-
-      <TextInput
-        placeholder="Password"
-        value={formik.values.password}
-        onChangeText={formik.handleChange('password')}
-        onBlur={formik.handleBlur('password')}
-        style={[
-          styles.input,
-          styles.child,
-          formik.touched.password && formik.errors.password && styles.errorInput
-        ]}      
-        secureTextEntry
-      />
-      {formik.touched.password && formik.errors.password && (
-        <Text style={{ color: '#d73a4a', marginHorizontal: 10 }}>{formik.errors.password}</Text>
-      )}
-
-      <Pressable 
-        onPress={formik.handleSubmit}
-        style={{ ...styles.button, ...styles.child}}
-      >
-        <Text style={styles.buttonText}>Sign in</Text>
-      </Pressable>
-    </View>
+    <SignInForm onSubmit={onSubmit} />
   );
 };
 
