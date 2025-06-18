@@ -1,10 +1,13 @@
-import { View, Pressable, StyleSheet, Image } from 'react-native';
+import { View, Pressable, StyleSheet, FlatList } from 'react-native';
 import { useNavigate, useParams } from 'react-router-native';
 import * as Linking from 'expo-linking';
 import Text from './Text';
 import theme from '../theme';
 
 import useRepository from '../hooks/useRepository';
+
+import RepositoryInfo from './RepositoryInfo';
+import ReviewItem from './ReviewItem';
 
 const styles = StyleSheet.create({
   containerItem: { 
@@ -60,20 +63,6 @@ const styles = StyleSheet.create({
   }
 })
 
-export const formatStatNumber = (num) => {
-    if (num >= 1000) {
-        return (`${Math.round(num / 1000 * 10) / 10}k`);
-    }else{
-        return num;
-    }
-};
-
-const StatItem = ({ text, testID, number }) => (
-    <View style={styles.statItem}>
-        <Text testID={testID} fontWeight="bold">{formatStatNumber(number)}</Text> 
-        <Text>{text}</Text>
-    </View>
-);
 
 const RepositoryView = () => {
   const navigate = useNavigate();
@@ -99,39 +88,15 @@ const RepositoryView = () => {
     )
   }
 
+  const reviewNodes = repository.reviews.edges.map(edge => edge.node);
+
   return (
-    <View testID="repositoryView" style={styles.containerItem}>
-      <View style={styles.containerDetails}>
-        <View style={{ flexGrow: 0, padding: 8, width: '20%' }}>
-          <Image
-            style={styles.tinyLogo}
-            source={{uri: repository.ownerAvatarUrl}}
-          />
-        </View>
-        <View style={{ flexGrow: 1, padding: 8, width: '80%' }}> 
-          <Text testID="fullName" fontWeight="bold" fontSize="subheading" color="primary">{repository.fullName}</Text>
-          <Text testID="description" color="textSecoundary" >{repository.description}</Text>
-          <View style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-            <Text testID="language" fontWeight="bold" style={styles.languageLogo}>{repository.language}</Text>
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.containerStats}>
-        <StatItem testID="stargazersCount" text="Stars" number={repository.stargazersCount}/>
-        <StatItem testID="forksCount" text="Forks" number={repository.forksCount}/>
-        <StatItem testID="reviewCount" text="Reviews" number={repository.reviewCount}/>
-        <StatItem testID="ratingAverage" text="Rating" number={repository.ratingAverage}/>
-      </View>
-
-      <Pressable
-        testID='openInGithubButton' 
-        onPress={() => Linking.openURL(repository.url)}
-        style={{ ...styles.button, ...styles.child}}
-      >
-        <Text style={styles.buttonText}>Open in GitHub</Text>
-      </Pressable>
-    </View>
+    <FlatList
+      data={reviewNodes}
+      renderItem={({ item }) => <ReviewItem review={item} />}
+      keyExtractor={({ id }) => id}
+      ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
+    />
   );
 };
 
