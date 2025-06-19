@@ -4,7 +4,6 @@ import * as Linking from 'expo-linking';
 import Text from './Text';
 import theme from '../theme';
 
-import useRepository from '../hooks/useRepository';
 
 const styles = StyleSheet.create({
   containerItem: { 
@@ -75,30 +74,7 @@ const StatItem = ({ text, testID, number }) => (
     </View>
 );
 
-const RepositoryInfo = () => {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const { repository, loading, error } = useRepository(id);
-
-  if (loading) {
-    return (
-      <View style={{alignItems: "center", justifyContent: "center", flex: 1}}>
-        <Text>Loading...</Text>
-      </View>
-    )
-  }
-
-  if (error) {
-    return (
-      <View style={{alignItems: "center", justifyContent: "center", flex: 1}}>
-        <Text>Error: {error.message}</Text>
-        <Pressable style={styles.button} onPress={() => navigate("/")}>
-          <Text style={styles.buttonText}>Go back</Text>
-        </Pressable>
-      </View>
-    )
-  }
-
+const RepositoryInfo = ({ repository }) => {
   return (
     <View testID="repositoryView" style={styles.containerItem}>
       <View style={styles.containerDetails}>

@@ -85,7 +85,7 @@ export const REVIEW_FRAGMENT = gql`
 export const ONE_REPOSITORY_FRAGMENT = gql`
   fragment OneRepositoryFragment on Repository {
     ...RepositoryFragment
-    reviews {
+    reviews(first: $first, after: $after) {
       totalCount
       pageInfo {
         ...PageInfoFragment

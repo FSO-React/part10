@@ -38,7 +38,7 @@ export const GET_ME = gql`
 `;
 
 export const GET_REPOSITORY = gql`
-  query Repository($id: ID!) {
+  query Repository($id: ID!, $first: Int, $after: String) {
     repository(id: $id) {
       ...OneRepositoryFragment
     }

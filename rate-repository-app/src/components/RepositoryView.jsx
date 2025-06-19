@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 const RepositoryView = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { repository, loading, error } = useRepository(id);
+  const { repository, loading, error, fetchMore } = useRepository(id);
 
   if (loading) {
     return (
@@ -88,6 +88,10 @@ const RepositoryView = () => {
     )
   }
 
+  const onEndReach = () => {
+    fetchMore();
+  }
+
   const reviewNodes = repository.reviews.edges.map(edge => edge.node);
 
   return (
@@ -96,6 +100,8 @@ const RepositoryView = () => {
       renderItem={({ item }) => <ReviewItem review={item} />}
       keyExtractor={({ id }) => id}
       ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
