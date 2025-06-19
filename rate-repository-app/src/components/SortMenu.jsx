@@ -14,12 +14,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const SortMenu = ({ options, onSelect }) => {
+const SortMenu = ({ options, selectedValue, onSelect }) => {
   const [visible, setVisible] = useState(false);
-  const [selectedLabel, setSelectedLabel] = useState('Sort by');
+  const selectedLabel = options.find(opt => opt.value === selectedValue);
 
   const handleSelect = (label, value) => {
-    setSelectedLabel(label);
     onSelect(value);
     setVisible(false);
   };
@@ -31,7 +30,7 @@ const SortMenu = ({ options, onSelect }) => {
         onDismiss={() => setVisible(true)}
         anchor={
           <Button mode="contained" style={styles.button} onPress={() => setVisible(true)}>
-            {selectedLabel}
+            {selectedLabel.label}
           </Button>
         }
       >

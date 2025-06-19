@@ -15,8 +15,7 @@ import AppBar from './AppBar';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.backgroundSecoundary,
-    flexGrow: 1,
-    flexShrink: 1,
+    flex: 1,
   },
 });
 
@@ -24,16 +23,18 @@ const Main = () => {
   return (
     <View style={styles.container}>
       <AppBar />
-      <Routes>
-        <Route path="/" element={<RepositoryList />} />
-        <Route path="/repositories/:id" element={<RepositoryView />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/createreview" element={<CreateReview />} />
-        <Route path="/myreviews" element={<MyReviews />} />
-        <Route path="/signout" element={<SignOut />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <View style={{ flex: 1 }}>
+        <Routes>
+          <Route path="/" element={<RepositoryList />} />
+          <Route path="/repositories/:id" element={<RepositoryView />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/createreview" element={<CreateReview />} />
+          <Route path="/myreviews" element={<MyReviews />} />
+          <Route path="/signout" element={<SignOut />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </View>
     </View>
   );
 };

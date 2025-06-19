@@ -31,12 +31,12 @@ const sortingOptions = [
 
 export class RepositoryListContainer extends React.Component {
   renderHeader = () => {
-    const { wordSearch, setWordSearch, setSorting } = this.props;
+    const { wordSearch, setWordSearch, sorting, setSorting } = this.props;
 
     return (
       <View style={styles.sortingContainer}>
         <SearchBar wordSearch={wordSearch} setWordSearch={setWordSearch} />
-        <SortMenu options={sortingOptions} onSelect={setSorting} />
+        <SortMenu options={sortingOptions} selectedValue={sorting} onSelect={setSorting} />
       </View>
     );
   };
