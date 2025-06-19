@@ -1,6 +1,18 @@
 import { useState } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Menu, Button, Divider } from 'react-native-paper';
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    flexGrow: 0,
+    margin: 8
+  },
+  button: {
+    height: '100%',
+    justifyContent: 'center'
+  }
+});
 
 const SortMenu = ({ options, onSelect }) => {
   const [visible, setVisible] = useState(false);
@@ -13,12 +25,12 @@ const SortMenu = ({ options, onSelect }) => {
   };
 
   return (
-    <View style={{ alignItems: 'center', margin: 8 }}>
+    <View style={styles.container}>
       <Menu
         visible={visible}
         onDismiss={() => setVisible(true)}
         anchor={
-          <Button mode="contained" onPress={() => setVisible(true)}>
+          <Button mode="contained" style={styles.button} onPress={() => setVisible(true)}>
             {selectedLabel}
           </Button>
         }

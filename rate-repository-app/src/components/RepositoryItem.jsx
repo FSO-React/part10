@@ -8,18 +8,21 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginBottom: 10, 
     marginHorizontal: 12, 
-    padding: 5, 
+    padding: 5,
+    height: 'auto' 
   },
   containerDetails: {
     display: "flex",
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    height: "auto",
   },
   containerStats: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     padding: 4,
+    height: "auto",
   },
   tinyLogo: {
     width: 50,
@@ -43,18 +46,18 @@ const styles = StyleSheet.create({
 })
 
 export const formatStatNumber = (num) => {
-    if (num >= 1000) {
-        return (`${Math.round(num / 1000 * 10) / 10}k`);
-    }else{
-        return num;
-    }
+  if (num >= 1000) {
+    return (`${Math.round(num / 1000 * 10) / 10}k`);
+  }else{
+    return num;
+  }
 };
 
 const StatItem = ({ text, testID, number }) => (
-    <View style={styles.statItem}>
-        <Text testID={testID} fontWeight="bold">{formatStatNumber(number)}</Text> 
-        <Text>{text}</Text>
-    </View>
+  <View style={styles.statItem}>
+    <Text testID={testID} fontWeight="bold">{formatStatNumber(number)}</Text> 
+    <Text>{text}</Text>
+  </View>
 );
 
 const RepositoryItem = (props) => {
