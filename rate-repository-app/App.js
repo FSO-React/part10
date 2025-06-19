@@ -1,5 +1,7 @@
 import { NativeRouter } from 'react-router-native';
 import { ApolloProvider } from '@apollo/client';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
@@ -13,9 +15,13 @@ const App = () => {
   return (
     <NativeRouter>
       <ApolloProvider client={apolloClient}>
-        <AuthStorageContext.Provider value={authStorage}>
-          <Main />
-        </AuthStorageContext.Provider>
+        <SafeAreaProvider>
+          <PaperProvider>
+            <AuthStorageContext.Provider value={authStorage}>
+              <Main />
+            </AuthStorageContext.Provider>
+          </PaperProvider>
+        </SafeAreaProvider>
       </ApolloProvider>
     </NativeRouter>
   );
