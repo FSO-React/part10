@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 import { 
   AUTHENTICATE_FRAGMENT,
-  REVIEW_FRAGMENT
+  REVIEW_FRAGMENT,
+  USER_FRAGMENT,
 } from './fragments';
 
 export const SIGN_IN = gql`
@@ -20,4 +21,13 @@ export const CREATE_REVIEW = gql`
     }
   }
   ${REVIEW_FRAGMENT}
+`;
+
+export const CREATE_USER = gql`
+  mutation CreateUser($user: CreateUserInput) {
+    createUser(user: $user) {
+      ...UserFragment    
+    }
+  }
+  ${USER_FRAGMENT}
 `;
