@@ -1,5 +1,6 @@
 import { Searchbar } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,7 +10,8 @@ const styles = StyleSheet.create({
   searchbar: {
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: "white"
   }
 });
 

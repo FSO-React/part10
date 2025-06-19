@@ -5,8 +5,7 @@ import Constants from 'expo-constants';
 import Text from './Text';
 import theme from '../theme';
 
-import { useQuery } from '@apollo/client';
-import { GET_ME } from '../graphql/queries';
+import useUser from '../hooks/useUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,12 +14,16 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     paddingBottom: 10,
     backgroundColor: theme.colors.backgroundPrimary,
-    // justifyContent: "center",
     alignItems: "center"
   },
   tab: {
     flexGrow: 0,
-    paddingLeft: 15,
+    marginHorizontal: 4,
+    marginTop: 4,
+    padding: 8,
+    borderColor: theme.colors.textTertiary,
+    borderWidth: 1,
+    borderRadius: 10,
     color: theme.colors.textTertiary,
   }
 });
@@ -42,13 +45,13 @@ const AppBarTab = ({ text, url, show }) => {
 );};
 
 const AppBar = () => {
-  const { data, loading } = useQuery(GET_ME);
+  const { loggedUser, loading } = useUser();
   
   if (loading) {
     return null;
   }
   
-  const loggedIn = data && data.me;
+  const loggedIn = loggedUser && loggedUser;
 
   return (
     <View style={styles.container}>
@@ -57,6 +60,7 @@ const AppBar = () => {
         <AppBarTab text="Sign In" url="/signin" show={!loggedIn}/>
         <AppBarTab text="Sign Up" url="/signup" show={!loggedIn}/>
         <AppBarTab text="Create review" url="/createreview" show={loggedIn}/>
+        <AppBarTab text="My reviews" url="/myreviews" show={loggedIn}/>
         <AppBarTab text="Sign Out" url="/signout" show={loggedIn}/>
       </ScrollView>
     </View>

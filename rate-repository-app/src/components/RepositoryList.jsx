@@ -65,7 +65,7 @@ export class RepositoryListContainer extends React.Component {
 
 
 const RepositoryList = () => {
-  const [sorting, setSorting] = useState('lowest');
+  const [sorting, setSorting] = useState('latest');
   const [wordSearch, setWordSearch] = useState('');
   const [wordSearchDebounced] = useDebounce(wordSearch, 500);
   const { repositories, loading, error } = useRepositories(sorting, wordSearchDebounced);

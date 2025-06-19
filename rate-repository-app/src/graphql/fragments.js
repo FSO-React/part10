@@ -69,7 +69,10 @@ export const REVIEW_FRAGMENT = gql`
   fragment ReviewFragment on Review {
     id
     user {
-      ...UserFragment
+      username
+    }
+    repository {
+      fullName
     }
     userId
     repositoryId
@@ -77,7 +80,6 @@ export const REVIEW_FRAGMENT = gql`
     createdAt
     text
   }
-  ${USER_FRAGMENT}
 `;
 
 export const ONE_REPOSITORY_FRAGMENT = gql`
