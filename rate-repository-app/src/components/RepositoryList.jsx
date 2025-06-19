@@ -42,7 +42,7 @@ export class RepositoryListContainer extends React.Component {
   };
 
   render(){
-    const { repositories } = this.props;
+    const { repositories, onEndReach } = this.props;
   
     const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
@@ -57,6 +57,8 @@ export class RepositoryListContainer extends React.Component {
             <RepositoryItem item={item} index={index} separators={separators} />
           )}
           ListHeaderComponent={this.renderHeader}
+          onEndReached={onEndReach}
+          onEndReachedThreshold={0.5}
         />
     </View>
     );
@@ -68,7 +70,11 @@ const RepositoryList = () => {
   const [sorting, setSorting] = useState('latest');
   const [wordSearch, setWordSearch] = useState('');
   const [wordSearchDebounced] = useDebounce(wordSearch, 500);
-  const { repositories, loading, error } = useRepositories(sorting, wordSearchDebounced);
+  const { repositories, loading, error, fetchMore } = useRepositories(sorting, wordSearchDebounced);
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   if (loading) {
     return (
@@ -86,7 +92,14 @@ const RepositoryList = () => {
     )
   }
 
-  return <RepositoryListContainer repositories={repositories} sorting={sorting} setSorting={setSorting} wordSearch={wordSearch} setWordSearch={setWordSearch} />;
+  return <RepositoryListContainer
+    repositories={repositories}
+    sorting={sorting}
+    setSorting={setSorting}
+    wordSearch={wordSearch}
+    setWordSearch={setWordSearch} 
+    onEndReach={onEndReach}
+  />;
 };
 
 export default RepositoryList;
